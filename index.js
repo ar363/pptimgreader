@@ -64,7 +64,7 @@ async function pptocr(file) {
 
     zipfile.on("end", function () {
       pages = pages.sort((a, b) => a.p - b.p);
-      fs.writeFileSync("out.txt", pages.map((x) => x.t).join("\n\n"));
+      fs.writeFileSync("out.txt", pages.map((x) => x.t.replaceAll(/[“”‘’\']/gi, '"')).join("\n\n"));
       console.log("Done!");
     });
   });
